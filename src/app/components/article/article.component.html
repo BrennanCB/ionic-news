@@ -1,0 +1,20 @@
+<ion-card class="article" padding-bottom>
+  <ion-img [src]="article?.urlToImage"></ion-img>
+
+  <ion-item>
+    <ion-icon name="calendar" slot="start"></ion-icon>
+    <ion-label>{{article.publishedAt | date:'medium'}}</ion-label>
+  </ion-item>
+  <ion-card-content class="article-content">
+    <ion-card-title>{{article?.title}}</ion-card-title>
+    <p>
+      {{article.description}}
+    </p>
+  </ion-card-content>
+
+  <ion-item text-center>
+    <ion-label>
+      <i>{{article.source.name}}</i>
+    </ion-label>
+  </ion-item>
+</ion-card>
