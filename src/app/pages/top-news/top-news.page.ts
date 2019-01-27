@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { NewsService } from '../../services/news.service';
 
@@ -13,8 +14,18 @@ export class TopNewsPage implements OnInit {
 
   constructor(private newsService: NewsService) { }
 
+  private getData(): Observable<any> {
+    return this.newsService.getData('top-headlines?country=us');
+  }
+
+  public onRefresh(event) {
+    this.news = this.getData().pipe(tap(() => {
+      event.target.complete();
+    }));
+  }
+
   ngOnInit() {
-    this.news = this.newsService.getData('top-headlines?country=us').pipe(tap(data => console.log(data)));
+    this.news = this.getData();
   }
 
 }
