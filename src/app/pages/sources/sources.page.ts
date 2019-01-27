@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { NewsService } from '../../services/news.service';
 
 @Component({
   selector: 'app-sources',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SourcesPage implements OnInit {
 
-  constructor() { }
+  public sources$: Observable<any>;
+  public fakeSources = new Array(20);
+
+  constructor(private newsService: NewsService) { }
 
   ngOnInit() {
+    this.sources$ = this.newsService.getData('sources');
   }
 
 }
