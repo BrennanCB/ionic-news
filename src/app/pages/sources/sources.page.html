@@ -20,7 +20,7 @@
     <ion-row>
       <ion-col *ngFor="let source of (sources$ | async)?.sources | search: searchTerm" size="12" size-md="6">
         <ion-list>
-          <ion-item color="light">
+          <ion-item color="light" routerLink="/tabs/sources/{{source.id}}" detail="false">
             <ion-label text-wrap>
               <ion-text>
                 <h2>{{source.name}}

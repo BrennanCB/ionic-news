@@ -10,6 +10,7 @@ const routes: Routes = [
     children: [
       {path: 'top-news', loadChildren: '../top-news/top-news.module#TopNewsPageModule'},
       {path: 'headlines', loadChildren: '../headlines/headlines.module#HeadlinesPageModule'},
+      {path: 'sources/:id', loadChildren: '../source/source.module#SourcePageModule'},
       {path: 'sources', loadChildren: '../sources/sources.module#SourcesPageModule'},
       {path: 'favourites', loadChildren: '../favourites/favourites.module#FavouritesPageModule'},
       {path: 'settings', loadChildren: '../settings/settings.module#SettingsPageModule'},
