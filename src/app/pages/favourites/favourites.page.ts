@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Storage } from '@ionic/storage';
+import { SourceInterface } from '../sources/models/source.interface';
 
 @Component({
   selector: 'app-favourites',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FavouritesPage implements OnInit {
 
-  constructor() { }
+  public sources: SourceInterface[] = [];
 
-  ngOnInit() {
+  constructor(private storage: Storage) { }
+
+  async ngOnInit() {
+    const val = await this.storage.get('favourite');
+
+    if (val !== null) {
+      this.sources = JSON.parse(val);
+    }
   }
-
 }
