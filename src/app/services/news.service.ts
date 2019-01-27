@@ -28,11 +28,11 @@ export class NewsService {
   }
 
   public getData(url: string): Observable<any> {
-    this.showLoading_async();
+    // this.showLoading_async();
     return this.http.get(`${ apiUrl }/${ url }`, {params}).pipe(tap(() => {
-      if (this.loading) {
-        this.loading.dismiss();
-      }
+      // if (this.loading) {
+      //   this.loading.dismiss();
+      // }
     }));
   }
 }

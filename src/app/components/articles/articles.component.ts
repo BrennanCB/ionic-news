@@ -9,7 +9,9 @@ import { ArticlesInterface } from './models/articles.interface';
 })
 export class ArticlesComponent implements OnInit {
 
-  @Input() public news: Observable<ArticlesInterface>;
+  @Input() public news$: Observable<ArticlesInterface>;
+
+  fakeArticles = new Array(20);
 
   constructor() { }
 

@@ -10,7 +10,7 @@ import { NewsService } from '../../services/news.service';
 })
 export class TopNewsPage implements OnInit {
 
-  public news: any;
+  public news$: Observable<any>;
 
   constructor(private newsService: NewsService) { }
 
@@ -19,13 +19,13 @@ export class TopNewsPage implements OnInit {
   }
 
   public onRefresh(event) {
-    this.news = this.getData().pipe(tap(() => {
+    this.news$ = this.getData().pipe(tap(() => {
       event.target.complete();
     }));
   }
 
   ngOnInit() {
-    this.news = this.getData();
+    this.news$ = this.getData();
   }
 
 }
