@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-settings',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsPage implements OnInit {
 
-  constructor() { }
+  constructor(private storage: Storage, private toastController: ToastController) { }
 
-  ngOnInit() {
+  private async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Cleared favourites.',
+      color: 'success'
+    });
+
+    toast.present();
+  }
+
+  public onClearFavourites() {
+    this.storage.remove('favourite');
+    this.presentToast();
+  }
+
+  public ngOnInit() {
   }
 
 }

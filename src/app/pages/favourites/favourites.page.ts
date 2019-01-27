@@ -13,11 +13,24 @@ export class FavouritesPage implements OnInit {
 
   constructor(private storage: Storage) { }
 
-  async ngOnInit() {
+  private async getFavourites_async() {
     const val = await this.storage.get('favourite');
 
     if (val !== null) {
       this.sources = JSON.parse(val);
     }
+  }
+
+  public onRefresh() {
+    this.getFavourites_async();
+  }
+
+  public async removeFromFavourite(source: SourceInterface) {
+    this.sources = this.sources.splice(this.sources.indexOf(source), 1);
+    await this.storage.set('favourite', JSON.stringify(this.sources));
+  }
+
+  public ngOnInit() {
+    this.getFavourites_async();
   }
 }

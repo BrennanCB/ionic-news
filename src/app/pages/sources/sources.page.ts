@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs';
 import { NewsService } from '../../services/news.service';
@@ -16,7 +17,16 @@ export class SourcesPage implements OnInit {
   public fakeSources = new Array(20);
   public searchTerm: string = '';
 
-  constructor(private newsService: NewsService, private storage: Storage) { }
+  constructor(private newsService: NewsService, private storage: Storage, private toastController: ToastController) { }
+
+  private async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Added to favourites.',
+      color: 'success'
+    });
+
+    toast.present();
+  }
 
   public async addToFavourite(source: SourceInterface) {
     const val = await this.storage.get('favourite');
@@ -30,6 +40,7 @@ export class SourcesPage implements OnInit {
     items.push(source);
 
     await this.storage.set('favourite', JSON.stringify(items));
+    this.presentToast();
   }
 
   ngOnInit() {
